@@ -68,14 +68,18 @@
 
   <div id="scusa"></div>
 
-  <script>
-    async function genera() {
-      const categoria = document.getElementById('categoria').value;
-      const lingua = document.getElementById('lingua').value;
-      const res = await fetch(`https://scusaperfetta-backend.onrender.com/generate?categoria=${categoria}&lingua=${lingua}`);
-      const data = await res.json();
-      document.getElementById('scusa').innerText = data.scusa || "Something went wrong. Try again!";
-    }
-  </script>
-</body>
-</html>
+<script>
+  async function genera() {
+    const categoria = document.getElementById('categoria').value;
+    const lingua = document.getElementById('lingua').value;
+
+    const res = await fetch(`https://scusaperfetta-backend.onrender.com/generate?categoria=${categoria}&lingua=${lingua}`);
+    const data = await res.json();
+
+    const scusaGenerata = data.scusa || "Oops! Nessuna scusa trovata.";
+    document.getElementById('scusa').innerText = scusaGenerata;
+
+    // Mostra pulsanti di condivisione
+    document.getElementById('share').style.display = 'block';
+  }
+</script>
