@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExcuseMe.AI – The World’s #1 Excuse Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #2b6cb0;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    select, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1rem;
+    }
+    #scusa {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>ExcuseMe.AI – The World’s #1 Excuse Generator</h1>
+  <p>Generate the perfect excuse in your language – instantly and for free.</p>
+
+  <label for="categoria">Choose a category:</label>
+  <select id="categoria">
+    <option value="lavoro">Work</option>
+    <option value="appuntamento">Date</option>
+    <option value="amico">Friend</option>
+    <option value="famiglia">Family</option>
+    <option value="generica">Anything</option>
+  </select>
+
+  <label for="lingua">Choose your language:</label>
+  <select id="lingua">
+    <option value="en">English</option>
+    <option value="it">Italiano</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="de">Deutsch</option>
+    <option value="ro">Română</option>
+  </select>
+
+  <br/>
+  <button onclick="genera()">Generate Excuse</button>
+
+  <div id="scusa"></div>
+
+  <script>
+    async function genera() {
+      const categoria = document.getElementById('categoria').value;
+      const lingua = document.getElementById('lingua').value;
+      const res = await fetch(`https://scusaperfetta-backend.onrender.com/generate?categoria=${categoria}&lingua=${lingua}`);
+      const data = await res.json();
+      document.getElementById('scusa').innerText = data.scusa || "Something went wrong. Try again!";
+    }
+  </script>
+</body>
+</html>
